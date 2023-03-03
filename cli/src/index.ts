@@ -1,6 +1,15 @@
 import { logger } from './utils/logger.js';
+import { run } from './cli/index.js';
 
-const main = async () => {};
+const main = async () => {
+  const {
+    name,
+    packages,
+    flags: { noGit, noInstall, importAlias },
+  } = await run();
+
+  console.log(name, packages, noGit, noInstall, importAlias);
+};
 
 main().catch((err) => {
   logger.error('Aborting installation...');

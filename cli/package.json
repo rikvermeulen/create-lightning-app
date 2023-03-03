@@ -1,0 +1,54 @@
+{
+  "name": "create-lightning-app",
+  "version": "0.0.2",
+  "description": "Create web application with",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "type": "module",
+  "exports": "./dist/index.js",
+  "bin": {
+    "create-lightning-app": "./dist/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rikvermeulen/create-lightning-app.git"
+  },
+  "author": "Rik Vermeulen",
+  "bugs": {
+    "url": "https://github.com/rikvermeulen/create-lightning-app/issues"
+  },
+  "homepage": "https://github.com/rikvermeulen/create-lightning-app#readme",
+  "scripts": {
+    "typecheck": "tsc",
+    "build": "tsup",
+    "dev": "tsup --watch",
+    "clean": "rm -rf dist .turbo node_modules",
+    "start": "node dist/index.js",
+    "lint": "eslint . --report-unused-disable-directives",
+    "lint:fix": "pnpm lint --fix",
+    "format": "prettier --write --plugin-search-dir=. **/*.{cjs,mjs,ts,tsx,md,json} --ignore-path ../.gitignore --ignore-unknown --no-error-on-unmatched-pattern",
+    "format:check": "pnpm format --check",
+    "release": "changeset version",
+    "pub:beta": "pnpm build && npm publish --tag beta",
+    "pub:next": "pnpm build && npm publish --tag next",
+    "pub:release": "npm build && npm publish"
+  },
+  "prettier": {
+    "trailingComma": "es5",
+    "singleQuote": true,
+    "printWidth": 100,
+    "tabWidth": 2
+  },
+  "devDependencies": {
+    "@types/node": "^18.14.5",
+    "next": "^13.1.6",
+    "prettier": "^2.8.4",
+    "prettier-plugin-tailwindcss": "^0.2.3",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "tsup": "^6.6.3",
+    "typescript": "^4.9.5"
+  }
+}

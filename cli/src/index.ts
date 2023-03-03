@@ -1,6 +1,28 @@
 import { logger } from './utils/logger.js';
+import { run } from './cli/index.js';
+import { dependencies } from './dependencies/index.js';
+import path from 'path';
+import fs from 'fs-extra';
+import { createProject } from './helpers/createProject.js';
 
-const main = async () => {};
+const main = async () => {
+  const {
+    name,
+    packages,
+    flags: { noGit, noInstall, importAlias },
+  } = await run();
+
+  const usedPackages = dependencies(packages);
+
+  const project = await createProject({
+    projectName: name,
+    packages: usedPackages,
+    importAlias: importAlias,
+    noInstall,
+  });
+
+  const pkgJson = fs.readJSONSync(path.join(project, 'package.json'));
+};
 
 main().catch((err) => {
   logger.error('Aborting installation...');

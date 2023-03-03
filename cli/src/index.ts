@@ -1,5 +1,9 @@
 import { logger } from './utils/logger.js';
 import { run } from './cli/index.js';
+import { dependencies } from './dependencies/index.js';
+import path from 'path';
+import fs from 'fs-extra';
+import { createProject } from './helpers/createProject.js';
 
 const main = async () => {
   const {
@@ -8,7 +12,16 @@ const main = async () => {
     flags: { noGit, noInstall, importAlias },
   } = await run();
 
-  console.log(name, packages, noGit, noInstall, importAlias);
+  const usedPackages = dependencies(packages);
+
+  const project = await createProject({
+    projectName: name,
+    packages: usedPackages,
+    importAlias: importAlias,
+    noInstall,
+  });
+
+  const pkgJson = fs.readJSONSync(path.join(project, 'package.json'));
 };
 
 main().catch((err) => {

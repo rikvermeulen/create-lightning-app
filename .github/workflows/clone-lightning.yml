@@ -12,13 +12,14 @@ jobs:
 
     steps:
       - name: Check out my other  repo
-      - uses: actions/checkout@master
+        uses: actions/checkout@master
         with:
           repository: rikvermeulen/create-lightning-app
           path: ./cli/template/base
           submodules: recursive
+
       - uses: actions/checkout@v3
-      - name: Run shell commands
+        name: Run shell commands
         run: |
           git config --global url.https://github.com/.insteadOf git://github.com/
           git clone https://github.com/rikvermeulen/lightning.git

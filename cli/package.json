@@ -58,6 +58,7 @@
     "commander": "^10.0.0",
     "fs-extra": "^11.1.0",
     "inquirer": "^9.1.4",
+    "sort-package-json": "^2.4.1",
     "type-fest": "^3.6.1"
   }
 }

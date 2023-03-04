@@ -5,7 +5,7 @@ import fs from 'fs-extra';
 import { PKG_ROOT } from '../../utils/getCurrentDir.js';
 import { addPackageDependency } from '../../utils/addDependency.js';
 
-export const pwaInstaller: Installer = ({ projectDir, packages }) => {
+export const pwaInstaller: Installer = ({ projectDir }) => {
   addPackageDependency({
     projectDir,
     dependencies: ['@ducanh2912/next-pwa'],

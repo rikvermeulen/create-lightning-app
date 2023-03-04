@@ -1,4 +1,4 @@
-// /** @type {import("eslint").Linter.Config} */
+/** @type {import("eslint").Linter.Config} */
 
 const config = {
   root: true,
@@ -13,11 +13,7 @@ const config = {
     ecmaVersion: 'latest',
     sourceType: 'module',
     tsconfigRootDir: __dirname,
-    project: [
-      './tsconfig.json',
-      './cli/tsconfig.eslint.json', // separate eslint config for the CLI since we want to lint and typecheck differently due to template files
-      './cli/dist/index.js', // this is a hack to make eslint work with the CLI
-    ],
+    project: ['./tsconfig.json', './cli/tsconfig.eslint.json', './cli/dist/index.js'],
   },
   rules: {
     '@typescript-eslint/restrict-template-expressions': 'off',
@@ -31,9 +27,6 @@ const config = {
     ],
     'import/consistent-type-specifier-style': ['error', 'prefer-inline'],
 
-    // These rules are only disabled because we hit a bug in linting.
-    // See https://github.com/t3-oss/create-t3-app/pull/1036#discussion_r1060505136
-    // If you still see the bug once TypeScript@5 is used, please let typescript-eslint know!
     '@typescript-eslint/no-unsafe-argument': 'off',
     '@typescript-eslint/no-unsafe-assignment': 'off',
     '@typescript-eslint/no-unsafe-call': 'off',
@@ -41,7 +34,6 @@ const config = {
     '@typescript-eslint/no-unsafe-return': 'off',
     '@typescript-eslint/no-unnecessary-type-assertion': 'off',
 
-    // For educational purposes we format our comments/jsdoc nicely
     'isaacscript/complete-sentences-jsdoc': 'warn',
     'isaacscript/format-jsdoc-comments': 'warn',
   },

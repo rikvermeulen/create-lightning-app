@@ -46,7 +46,7 @@ importers:
       '@types/fs-extra': ^11.0.1
       '@types/inquirer': ^9.0.3
       '@types/node': ^18.14.6
-      chalk: 2.4.2
+      chalk: 5.2.0
       commander: ^10.0.0
       fs-extra: ^11.1.0
       inquirer: ^9.1.4
@@ -70,7 +70,7 @@ importers:
       '@types/fs-extra': 11.0.1
       '@types/inquirer': 9.0.3
       '@types/node': 18.14.6
-      chalk: 2.4.2
+      chalk: 5.2.0
       next: 13.2.3_biqbaboplfbrettd7655fr4n2y
       prettier: 2.8.4
       prettier-plugin-tailwindcss: 0.2.4_prettier@2.8.4
@@ -1191,7 +1191,6 @@ packages:
   /chalk/5.2.0:
     resolution: {integrity: sha512-ree3Gqw/nazQAPuJJEy+avdl7QfZMcUvmHIKgEZkGL+xOBzRvup5Hxo6LHuMceSxOabuJLJm5Yp/92R9eMmMvA==}
     engines: {node: ^12.17.0 || ^14.13 || >=16.0.0}
-    dev: false
 
   /chardet/0.7.0:
     resolution: {integrity: sha512-mT8iDcrh03qDGRRmoA2hmBJnxpllMR+0/0qlzjqZES6NdiWDcZkCNAk4rPFZ9Q85r27unkiNNg8ZOiwZXBHwcA==}

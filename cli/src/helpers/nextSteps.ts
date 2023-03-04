@@ -11,7 +11,7 @@ export const nextSteps = ({
 }: Pick<InstallerOptions, 'projectName' | 'packages' | 'noInstall'>) => {
   const packageManager = getUserPackageManager();
 
-  logger.info('Next steps:');
+  logger.info('\nNext steps:');
   logger.status(`  cd ${projectName}`);
 
   // To reflect yarn's default behavior of installing packages when no additional args provided

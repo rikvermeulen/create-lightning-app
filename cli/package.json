@@ -1,10 +1,10 @@
 {
   "name": "create-lightning-app",
-  "version": "0.0.2",
+  "version": "0.0.12",
   "description": "Create web application with",
   "license": "MIT",
   "engines": {
-    "node": ">=18"
+    "node": ">=16.0.0"
   },
   "type": "module",
   "exports": "./dist/index.js",
@@ -33,7 +33,7 @@
     "release": "changeset version",
     "pub:beta": "pnpm build && npm publish --tag beta",
     "pub:next": "pnpm build && npm publish --tag next",
-    "pub:release": "npm build && npm publish"
+    "pub:release": "pnpm build && npm publish"
   },
   "prettier": {
     "trailingComma": "es5",
@@ -45,10 +45,10 @@
     "@types/args": "^5.0.0",
     "@types/fs-extra": "^11.0.1",
     "@types/inquirer": "^9.0.3",
-    "@types/node": "^18.14.5",
-    "next": "^13.1.6",
+    "@types/node": "^18.14.6",
+    "next": "^13.2.3",
     "prettier": "^2.8.4",
-    "prettier-plugin-tailwindcss": "^0.2.3",
+    "prettier-plugin-tailwindcss": "^0.2.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "tsup": "^6.6.3",
@@ -57,6 +57,8 @@
   "dependencies": {
     "commander": "^10.0.0",
     "fs-extra": "^11.1.0",
-    "inquirer": "^9.1.4"
+    "inquirer": "^9.1.4",
+    "sort-package-json": "^2.4.1",
+    "type-fest": "^3.6.1"
   }
 }

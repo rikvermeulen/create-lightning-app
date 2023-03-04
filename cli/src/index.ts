@@ -1,9 +1,12 @@
+#!/usr/bin/env node
+
 import { logger } from './utils/logger.js';
 import { run } from './cli/index.js';
 import { dependencies } from './dependencies/index.js';
 import path from 'path';
 import fs from 'fs-extra';
 import { createProject } from './helpers/createProject.js';
+import { parseNameAndPath } from './utils/parseNameAndPath.js';
 
 const main = async () => {
   const {
@@ -12,16 +15,30 @@ const main = async () => {
     flags: { noGit, noInstall, importAlias },
   } = await run();
 
+  const [projectName, projectDir] = parseNameAndPath(name);
+
   const usedPackages = dependencies(packages);
 
   const project = await createProject({
-    projectName: name,
+    projectName: projectDir,
     packages: usedPackages,
     importAlias: importAlias,
     noInstall,
   });
 
-  const pkgJson = fs.readJSONSync(path.join(project, 'package.json'));
+  const packageJSON = fs.readJSONSync(path.join(project, 'package.json'));
+
+  packageJSON.name = projectName;
+
+  fs.writeJSONSync(path.join(project, 'package.json'), packageJSON, {
+    spaces: 2,
+  });
+
+  if (!noGit) {
+    logger.info('Initializing git repository...');
+  }
+
+  process.exit(0);
 };
 
 main().catch((err) => {

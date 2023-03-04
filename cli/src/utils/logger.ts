@@ -15,4 +15,7 @@ export const logger = {
   success(...args: unknown[]) {
     console.log(color(32), ...args);
   },
+  status(...args: unknown[]) {
+    console.log(...args);
+  },
 };

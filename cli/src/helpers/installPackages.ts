@@ -1,21 +1,21 @@
 import { type InstallerOptions, type installedPackages } from '../dependencies/index.js';
 import { logger } from '~/utils/logger.js';
+import chalk from 'chalk';
 
 type InstallPackagesOptions = {
   packages: installedPackages;
 } & InstallerOptions;
-// This runs the installer for all the packages that the user has selected
+
 export const installPackages = (options: InstallPackagesOptions) => {
   const { packages } = options;
-  logger.info('Adding boilerplate...');
 
-  for (const [name, pkgOpts] of Object.entries(packages)) {
-    if (pkgOpts.inUse) {
-      pkgOpts.installer(options);
+  logger.info('Setting up packages:');
 
-      console.log(`Successfully setup boilerplate for ${name}`);
+  for (const [name, packageOpts] of Object.entries(packages)) {
+    if (packageOpts.inUse) {
+      packageOpts.installer(options);
+
+      logger.status(`Successfully setup boilerplate for ${chalk.cyan(name)}`);
     }
   }
-
-  logger.info('');
 };

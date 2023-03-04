@@ -4,32 +4,28 @@ import inquirer from 'inquirer';
 import { type InstallerOptions } from '../dependencies/index.js';
 import { logger } from '~/utils/logger.js';
 import { PKG_ROOT } from '~/const.js';
+import chalk from 'chalk';
 
 // This bootstraps the base Next.js application
 export const scaffoldProject = async ({
+  // packageManager,
+  // noInstall
   projectName,
   projectDir,
-  packageManager,
-  noInstall,
 }: InstallerOptions) => {
   const templateDir = path.join(PKG_ROOT, 'template/base');
-
-  if (!noInstall) {
-    logger.info(`\nUsing: ${packageManager}\n`);
-  }
 
   if (fs.existsSync(projectDir)) {
     await checkIfDirExist(projectDir, projectName);
   }
 
-  console.log(`Installing project in: \n${projectDir}\n`);
+  logger.info(`\nInstalling project in: \n${chalk.underline.white(projectDir)}\n`);
 
   fs.copySync(templateDir, projectDir);
-  // fs.renameSync(path.join(projectDir, '_gitignore'), path.join(projectDir, '.gitignore'));
 
   const scaffoldedName = projectName === '.' ? 'App' : projectName;
 
-  console.log(`${scaffoldedName} ${'installation completed!'}\n`);
+  console.log(`installation for ${chalk.cyan(scaffoldedName)} completed!\n`);
 };
 
 async function checkIfDirExist(dir: string, projectName: string | undefined) {

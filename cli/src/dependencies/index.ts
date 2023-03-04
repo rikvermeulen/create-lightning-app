@@ -13,9 +13,8 @@ export type installedPackages = {
   };
 };
 
-export const tailwindInstaller: Installer = ({ projectDir }) => {
-  console.log(projectDir);
-};
+// eslint-disable-next-line @typescript-eslint/no-empty-function
+export const tailwindInstaller: Installer = ({ projectDir }) => {};
 
 export interface InstallerOptions {
   projectDir: string;

@@ -16,8 +16,6 @@ interface CliFlags {
   /** @internal Used in CI. */
   tailwind: boolean;
   /** @internal Used in CI. */
-  trpc: boolean;
-  /** @internal Used in CI. */
   prisma: boolean;
   /** @internal Used in CI. */
   nextAuth: boolean;
@@ -38,7 +36,6 @@ const defaultOptions: CLIResults = {
     default: false,
     CI: false,
     tailwind: false,
-    trpc: false,
     prisma: false,
     nextAuth: false,
     importAlias: '~/',

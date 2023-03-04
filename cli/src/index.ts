@@ -35,7 +35,7 @@ const main = async () => {
   });
 
   if (!noGit) {
-    logger.info('Initializing git repository...');
+    logger.info('\nInitializing git repository...');
   }
 
   process.exit(0);

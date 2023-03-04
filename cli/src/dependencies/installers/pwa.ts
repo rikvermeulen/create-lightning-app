@@ -5,36 +5,24 @@ import fs from 'fs-extra';
 import { PKG_ROOT } from '../../utils/getCurrentDir.js';
 import { addPackageDependency } from '../../utils/addDependency.js';
 
-export const prismaInstaller: Installer = ({ projectDir }) => {
+export const pwaInstaller: Installer = ({ projectDir, packages }) => {
   addPackageDependency({
     projectDir,
-    dependencies: ['prisma'],
+    dependencies: ['@ducanh2912/next-pwa'],
     devMode: true,
   });
-  addPackageDependency({
-    projectDir,
-    dependencies: ['@prisma/client'],
-    devMode: false,
-  });
+  const extrasDir = path.join(PKG_ROOT, 'template/dependencies/pwa');
 
-  const dependenciesDir = path.join(PKG_ROOT, 'template/dependencies');
+  const configSrc = path.join(extrasDir, '/next.config.js');
+  const configDest = path.join(projectDir, '/next.config.js');
 
-  // Directory to copy prisma from
-  const prismaSrc = path.join(dependenciesDir, 'prisma', 'base.prisma');
-
-  // Destination to copy prismaSrc to schema prisma
-  const prismaDest = path.join(projectDir, 'prisma/schema.prisma');
-
-  // add postinstall script to package.json
   const packageJsonPath = path.join(projectDir, 'package.json');
-
   const packageJsonContent = fs.readJSONSync(packageJsonPath) as PackageJson;
   packageJsonContent.scripts = {
     ...packageJsonContent.scripts,
-    postinstall: 'prisma generate',
   };
 
-  fs.copySync(prismaSrc, prismaDest);
+  fs.copySync(configSrc, configDest);
   fs.writeJSONSync(packageJsonPath, packageJsonContent, {
     spaces: 2,
   });

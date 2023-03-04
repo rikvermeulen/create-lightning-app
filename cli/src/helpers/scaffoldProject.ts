@@ -3,7 +3,7 @@ import fs from 'fs-extra';
 import inquirer from 'inquirer';
 import { type InstallerOptions } from '../dependencies/index.js';
 import { logger } from '~/utils/logger.js';
-import { PKG_ROOT } from '~/const.js';
+import { PKG_ROOT } from '../utils/getCurrentDir.js';
 import chalk from 'chalk';
 
 // This bootstraps the base Next.js application

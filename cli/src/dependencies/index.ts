@@ -1,7 +1,7 @@
 import { type PackageManager } from '../utils/getUserPackageManager.js';
-import { prismaInstaller } from './installers/primsa.js';
+import { prismaInstaller, pwaInstaller } from './installers/index.js';
 
-export const availablePackages = ['nextAuth', 'prisma', 'tailwind'] as const;
+export const availablePackages = ['nextAuth', 'prisma', 'tailwind', 'pwa'] as const;
 export type AvailablePackages = (typeof availablePackages)[number];
 
 export type Installer = (opts: InstallerOptions) => void;
@@ -36,5 +36,9 @@ export const dependencies = (packages: AvailablePackages[]) => ({
   tailwind: {
     inUse: packages.includes('tailwind'),
     installer: tailwindInstaller,
+  },
+  pwa: {
+    inUse: packages.includes('pwa'),
+    installer: pwaInstaller,
   },
 });

@@ -6,7 +6,6 @@ import { type AvailablePackages } from '~/dependencies/index.js';
 import { availablePackages } from '../dependencies/index.js';
 
 interface CliFlags {
-  noGit: boolean;
   noInstall: boolean;
   default: boolean;
   importAlias: string;
@@ -29,9 +28,8 @@ interface CLIResults {
 
 const defaultOptions: CLIResults = {
   name: glossary.DEFAULT_NAME,
-  packages: ['nextAuth', 'prisma', 'tailwind'],
+  packages: ['prisma', 'pwa'],
   flags: {
-    noGit: false,
     noInstall: false,
     default: false,
     CI: false,

@@ -2,7 +2,8 @@ import { Command } from 'commander';
 import inquirer from 'inquirer';
 import { validateName } from '../utils/validate.js';
 import glossary from '~/utils/glossary.js';
-import { AvailablePackages } from '~/dependencies/index.js';
+import { type AvailablePackages } from '~/dependencies/index.js';
+import { availablePackages } from '../dependencies/index.js';
 
 interface CliFlags {
   noGit: boolean;
@@ -64,9 +65,19 @@ export const run = async () => {
       '--noInstall',
       "Explicitly tell the CLI to not run the package manager's install command",
       false
-    );
+    )
+    .version('', '-v, --version', 'Display the version number')
+    .parse(process.argv);
+
+  const cliProvidedName = program.args[0];
+  if (cliProvidedName) {
+    results.name = cliProvidedName;
+  }
+
+  results.flags = program.opts();
 
   results.name = await promptName();
+  results.packages = await promptPackages();
 
   return results;
 };
@@ -84,4 +95,18 @@ const promptName = async (): Promise<string> => {
   });
 
   return name;
+};
+
+const promptPackages = async (): Promise<AvailablePackages[]> => {
+  const { packages } = await inquirer.prompt<Pick<CLIResults, 'packages'>>({
+    name: 'packages',
+    type: 'checkbox',
+    message: 'Which packages would you like to enable?',
+    choices: availablePackages.map((packageName) => ({
+      name: packageName,
+      checked: false,
+    })),
+  });
+
+  return packages;
 };

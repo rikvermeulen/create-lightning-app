@@ -1,0 +1,3 @@
+[submodule "cli/template/base"]
+	path = cli/template/base
+	url = https://github.com/rikvermeulen/lightning.git

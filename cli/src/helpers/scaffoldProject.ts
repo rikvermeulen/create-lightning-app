@@ -15,19 +15,22 @@ export const scaffoldProject = async ({
 }: InstallerOptions) => {
   const templateDir = path.join(PKG_ROOT, 'template/base');
 
+  // Check if the directory already exists
   if (fs.existsSync(projectDir)) {
     await checkIfDirExist(projectDir, projectName);
   }
 
   logger.info(`\nInstalling project in: \n${chalk.underline.white(projectDir)}\n`);
 
+  // Copy the template directory to the project directory
   fs.copySync(templateDir, projectDir);
 
   const scaffoldedName = projectName === '.' ? 'App' : projectName;
 
-  console.log(`installation for ${chalk.cyan(scaffoldedName)} completed!\n`);
+  console.log(`Installation for ${chalk.cyan(scaffoldedName)} completed!\n`);
 };
 
+// This checks if the directory already exists and if it does, it asks the user how to proceed
 async function checkIfDirExist(dir: string, projectName: string | undefined) {
   if (fs.readdirSync(dir).length === 0) {
     if (projectName !== '.')

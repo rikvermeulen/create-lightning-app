@@ -1,7 +1,7 @@
 {
   "name": "lightning-app",
   "version": "1.0.0",
-  "description": "Quickest way to start a new web app with full stack typesafety",
+  "description": "",
   "type": "module",
   "engines": {
     "node": ">=18.0.0"

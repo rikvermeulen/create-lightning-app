@@ -1,11 +1,14 @@
 import { type PackageManager } from '../utils/getUserPackageManager.js';
-import { prismaInstaller } from './installers/primsa.js';
+import { prismaInstaller, pwaInstaller } from './installers/index.js';
 
-export const availablePackages = ['nextAuth', 'prisma', 'tailwind'] as const;
+// This is the type of the available packages
+export const availablePackages = ['prisma', 'pwa'] as const;
+
 export type AvailablePackages = (typeof availablePackages)[number];
 
 export type Installer = (opts: InstallerOptions) => void;
 
+// This is the type of the packages object that is passed to the installer functions
 export type installedPackages = {
   [pkg in AvailablePackages]: {
     inUse: boolean;
@@ -13,10 +16,7 @@ export type installedPackages = {
   };
 };
 
-export const tailwindInstaller: Installer = ({ projectDir }) => {
-  console.log(projectDir);
-};
-
+// This is the type of the options object that is passed to the installer functions
 export interface InstallerOptions {
   projectDir: string;
   packageManager: PackageManager;
@@ -25,17 +25,14 @@ export interface InstallerOptions {
   projectName?: string;
 }
 
+// This is the main export of the dependencies folder
 export const dependencies = (packages: AvailablePackages[]) => ({
-  nextAuth: {
-    inUse: packages.includes('nextAuth'),
-    installer: tailwindInstaller,
-  },
   prisma: {
     inUse: packages.includes('prisma'),
     installer: prismaInstaller,
   },
-  tailwind: {
-    inUse: packages.includes('tailwind'),
-    installer: tailwindInstaller,
+  pwa: {
+    inUse: packages.includes('pwa'),
+    installer: pwaInstaller,
   },
 });

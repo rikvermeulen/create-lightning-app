@@ -6,7 +6,6 @@ import { type AvailablePackages } from '~/dependencies/index.js';
 import { availablePackages } from '../dependencies/index.js';
 
 interface CliFlags {
-  noGit: boolean;
   noInstall: boolean;
   default: boolean;
   importAlias: string;
@@ -15,8 +14,6 @@ interface CliFlags {
   CI: boolean;
   /** @internal Used in CI. */
   tailwind: boolean;
-  /** @internal Used in CI. */
-  trpc: boolean;
   /** @internal Used in CI. */
   prisma: boolean;
   /** @internal Used in CI. */
@@ -29,16 +26,15 @@ interface CLIResults {
   flags: CliFlags;
 }
 
+// Default options for the CLI
 const defaultOptions: CLIResults = {
   name: glossary.DEFAULT_NAME,
-  packages: ['nextAuth', 'prisma', 'tailwind'],
+  packages: ['prisma', 'pwa'],
   flags: {
-    noGit: false,
     noInstall: false,
     default: false,
     CI: false,
     tailwind: false,
-    trpc: false,
     prisma: false,
     nextAuth: false,
     importAlias: '~/',
@@ -46,11 +42,12 @@ const defaultOptions: CLIResults = {
 };
 
 export const run = async () => {
+  // Set the default options
   const results = defaultOptions;
 
-  const program = new Command().name('create-lightning-app');
-
-  program
+  // Create the CLI
+  const program = new Command()
+    .name('create-lightning-app')
     .description('A CLI for creating web applications with the t3 stack')
     .argument(
       '[dir]',
@@ -69,19 +66,25 @@ export const run = async () => {
     .version('', '-v, --version', 'Display the version number')
     .parse(process.argv);
 
-  const cliProvidedName = program.args[0];
-  if (cliProvidedName) {
-    results.name = cliProvidedName;
+  // If the user provided a name, use that
+  const CLIProvidedName = program.args[0];
+  if (CLIProvidedName) {
+    results.name = CLIProvidedName;
   }
 
+  // Set the flags
   results.flags = program.opts();
 
+  // If the user didn't provide a name, prompt them for one
   results.name = await promptName();
+
+  // Prompt the user for which packages they want to use
   results.packages = await promptPackages();
 
   return results;
 };
 
+// Prompt the user for the name of the project
 const promptName = async (): Promise<string> => {
   const { name } = await inquirer.prompt<Pick<CLIResults, 'name'>>({
     name: 'name',
@@ -97,6 +100,7 @@ const promptName = async (): Promise<string> => {
   return name;
 };
 
+// Prompt the user for which packages they want to use
 const promptPackages = async (): Promise<AvailablePackages[]> => {
   const { packages } = await inquirer.prompt<Pick<CLIResults, 'packages'>>({
     name: 'packages',

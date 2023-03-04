@@ -3,35 +3,35 @@ import fs from 'fs-extra';
 import inquirer from 'inquirer';
 import { type InstallerOptions } from '../dependencies/index.js';
 import { logger } from '~/utils/logger.js';
-import { PKG_ROOT } from '~/const.js';
+import { PKG_ROOT } from '../utils/getCurrentDir.js';
+import chalk from 'chalk';
 
 // This bootstraps the base Next.js application
-export const scaffoldProject = async ({
+export const unpackProject = async ({
+  // packageManager,
+  // noInstall
   projectName,
   projectDir,
-  packageManager,
-  noInstall,
 }: InstallerOptions) => {
   const templateDir = path.join(PKG_ROOT, 'template/base');
 
-  if (!noInstall) {
-    logger.info(`\nUsing: ${packageManager}\n`);
-  }
-
+  // Check if the directory already exists
   if (fs.existsSync(projectDir)) {
     await checkIfDirExist(projectDir, projectName);
   }
 
-  console.log(`Installing project in: \n${projectDir}\n`);
+  logger.info(`\nInstalling project in: \n${chalk.underline.white(projectDir)}\n`);
 
-  fs.copySync(templateDir, projectDir);
-  // fs.renameSync(path.join(projectDir, '_gitignore'), path.join(projectDir, '.gitignore'));
+  // Copy the template directory to the project directory
+  await fs.copySync(templateDir, projectDir, { filter: filterTemplate });
 
+  // This is the name of the scaffolded project
   const scaffoldedName = projectName === '.' ? 'App' : projectName;
 
-  console.log(`${scaffoldedName} ${'installation completed!'}\n`);
+  console.log(`Installation for ${chalk.cyan(scaffoldedName)} completed!\n`);
 };
 
+// This checks if the directory already exists and if it does, it asks the user how to proceed
 async function checkIfDirExist(dir: string, projectName: string | undefined) {
   if (fs.readdirSync(dir).length === 0) {
     if (projectName !== '.')
@@ -84,4 +84,9 @@ async function checkIfDirExist(dir: string, projectName: string | undefined) {
       fs.emptyDirSync(dir);
     }
   }
+}
+
+function filterTemplate(src: string) {
+  if (src.includes('.github')) return false;
+  return true;
 }

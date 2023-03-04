@@ -4,7 +4,7 @@
   "description": "Quickest way to start a new web app with full stack typesafety",
   "type": "module",
   "engines": {
-    "node": ">=18"
+    "node": ">=16.0.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -26,6 +26,19 @@
     "tabWidth": 2
   },
   "devDependencies": {
+    "@types/eslint": "^8.21.1",
+    "@types/node": "^18.14.6",
+    "@types/prettier": "^2.7.2",
+    "@typescript-eslint/eslint-plugin": "^5.54.0",
+    "@typescript-eslint/parser": "^5.54.0",
+    "eslint": "^8.35.0",
+    "eslint-config-prettier": "^8.6.0",
+    "eslint-config-turbo": "^0.0.9",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-isaacscript": "^2.6.6",
+    "eslint-plugin-prettier": "^4.2.1",
+    "eslint-plugin-react": "^7.32.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
     "prettier": "^2.8.4",
     "typescript": "4.9.5"
   },

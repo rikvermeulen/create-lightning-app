@@ -7,18 +7,23 @@ import path from 'path';
 import fs from 'fs-extra';
 import { createProject } from './helpers/createProject.js';
 import { parseNameAndPath } from './utils/parseNameAndPath.js';
+import { nextSteps } from './helpers/nextSteps.js';
 
 const main = async () => {
+  //Runs the CLI
   const {
     name,
     packages,
-    flags: { noGit, noInstall, importAlias },
+    flags: { noInstall, importAlias },
   } = await run();
 
+  //Validates the name of the project
   const [projectName, projectDir] = parseNameAndPath(name);
 
+  //Gets the packages that are used
   const usedPackages = dependencies(packages);
 
+  //Creates the project
   const project = await createProject({
     projectName: projectDir,
     packages: usedPackages,
@@ -26,17 +31,15 @@ const main = async () => {
     noInstall,
   });
 
+  //Updates the package.json name to the name of the project
   const packageJSON = fs.readJSONSync(path.join(project, 'package.json'));
-
   packageJSON.name = projectName;
-
   fs.writeJSONSync(path.join(project, 'package.json'), packageJSON, {
     spaces: 2,
   });
 
-  if (!noGit) {
-    logger.info('\nInitializing git repository...');
-  }
+  //Provides next steps logs for the user
+  nextSteps({ projectName: name, packages: usedPackages, noInstall });
 
   process.exit(0);
 };

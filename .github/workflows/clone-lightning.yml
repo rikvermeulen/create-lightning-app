@@ -2,7 +2,7 @@ name: import lightning
 
 on:
   push:
-    branches: [master]
+    branches: [master, feauture/*]
   pull_request:
     branches: [master]
 

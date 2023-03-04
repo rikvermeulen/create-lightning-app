@@ -2,7 +2,7 @@ import { type installedPackages } from '../dependencies/index.js';
 import { getUserPackageManager } from '../utils/getUserPackageManager.js';
 import path from 'path';
 import { installPackages } from './installPackages.js';
-import { scaffoldProject } from './scaffoldProject.js';
+import { unpackProject } from './unpackProject.js';
 
 interface CreateProjectOptions {
   projectName: string;
@@ -15,7 +15,8 @@ export const createProject = async ({ projectName, packages, noInstall }: Create
   const packageManager = getUserPackageManager();
   const projectDir = path.resolve(process.cwd(), projectName);
 
-  await scaffoldProject({
+  // Unpack the project
+  await unpackProject({
     projectName,
     projectDir,
     packageManager,

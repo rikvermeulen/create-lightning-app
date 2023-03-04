@@ -7,7 +7,7 @@ import { PKG_ROOT } from '../utils/getCurrentDir.js';
 import chalk from 'chalk';
 
 // This bootstraps the base Next.js application
-export const scaffoldProject = async ({
+export const unpackProject = async ({
   // packageManager,
   // noInstall
   projectName,
@@ -23,8 +23,9 @@ export const scaffoldProject = async ({
   logger.info(`\nInstalling project in: \n${chalk.underline.white(projectDir)}\n`);
 
   // Copy the template directory to the project directory
-  fs.copySync(templateDir, projectDir);
+  await fs.copySync(templateDir, projectDir, { filter: filterTemplate });
 
+  // This is the name of the scaffolded project
   const scaffoldedName = projectName === '.' ? 'App' : projectName;
 
   console.log(`Installation for ${chalk.cyan(scaffoldedName)} completed!\n`);
@@ -83,4 +84,9 @@ async function checkIfDirExist(dir: string, projectName: string | undefined) {
       fs.emptyDirSync(dir);
     }
   }
+}
+
+function filterTemplate(src: string) {
+  if (src.includes('.github')) return false;
+  return true;
 }

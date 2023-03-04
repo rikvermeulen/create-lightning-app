@@ -19,6 +19,9 @@ specifiers:
   turbo: ^1.8.3
   typescript: 4.9.5
 
+dependencies:
+  turbo: 1.8.3
+
 devDependencies:
   '@changesets/changelog-github': 0.4.8
   '@changesets/cli': 2.26.0
@@ -35,7 +38,6 @@ devDependencies:
   eslint-plugin-react: 7.32.2_eslint@8.35.0
   eslint-plugin-react-hooks: 4.6.0_eslint@8.35.0
   prettier: 2.8.4
-  turbo: 1.8.3
   typescript: 4.9.5
 
 packages:
@@ -2640,7 +2642,7 @@ packages:
     cpu: [x64]
     os: [darwin]
     requiresBuild: true
-    dev: true
+    dev: false
     optional: true
 
   /turbo-darwin-arm64/1.8.3:
@@ -2648,7 +2650,6 @@ packages:
     cpu: [arm64]
     os: [darwin]
     requiresBuild: true
-    dev: true
     optional: true
 
   /turbo-linux-64/1.8.3:
@@ -2656,7 +2657,7 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
-    dev: true
+    dev: false
     optional: true
 
   /turbo-linux-arm64/1.8.3:
@@ -2664,7 +2665,7 @@ packages:
     cpu: [arm64]
     os: [linux]
     requiresBuild: true
-    dev: true
+    dev: false
     optional: true
 
   /turbo-windows-64/1.8.3:
@@ -2672,7 +2673,7 @@ packages:
     cpu: [x64]
     os: [win32]
     requiresBuild: true
-    dev: true
+    dev: false
     optional: true
 
   /turbo-windows-arm64/1.8.3:
@@ -2680,7 +2681,7 @@ packages:
     cpu: [arm64]
     os: [win32]
     requiresBuild: true
-    dev: true
+    dev: false
     optional: true
 
   /turbo/1.8.3:
@@ -2694,7 +2695,7 @@ packages:
       turbo-linux-arm64: 1.8.3
       turbo-windows-64: 1.8.3
       turbo-windows-arm64: 1.8.3
-    dev: true
+    dev: false
 
   /type-check/0.4.0:
     resolution: {integrity: sha512-XleUoc9uwGXqjWwXaUTZAmzMcFZ5858QA2vvx1Ur5xIcixXIP+8LnFDgRplU30us6teqdlskFfu+ae4K79Ooew==}

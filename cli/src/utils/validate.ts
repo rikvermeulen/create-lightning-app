@@ -3,7 +3,7 @@ export const validateName = (input: string) => {
   const RegExp = /^(?:@[a-z0-9-*~][a-z0-9-*._~]*\/)?[a-z0-9-~][a-z0-9-._~]*$/;
   const paths = input.split('/');
 
-  let name = paths[paths.length - 1];
+  const name = paths[paths.length - 1];
 
   if (RegExp.test(name ?? '')) {
     return true;

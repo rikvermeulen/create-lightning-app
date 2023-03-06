@@ -23,7 +23,7 @@ export const unpackProject = async ({
   logger.info(`\nInstalling project in: \n${chalk.underline.white(projectDir)}\n`);
 
   // Copy the template directory to the project directory
-  await fs.copySync(templateDir, projectDir, { filter: filterTemplate });
+  await fs.copySync(templateDir, projectDir, { filter: filterOnRemoveTemplateFiles });
 
   // This is the name of the scaffolded project
   const scaffoldedName = projectName === '.' ? 'App' : projectName;
@@ -86,7 +86,8 @@ async function checkIfDirExist(dir: string, projectName: string | undefined) {
   }
 }
 
-function filterTemplate(src: string) {
+//filter out the template files
+function filterOnRemoveTemplateFiles(src: string) {
   if (src.includes('.github')) return false;
   return true;
 }

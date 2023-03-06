@@ -27,12 +27,40 @@
 
 Lightning is an opinionated collection of packages, utilities and a set of rules for your Next.js 13.2 project.
 
+It consists of:
+
+- [Next.js](https://nextjs.org)
+- [Tailwind CSS](https://tailwindcss.com)
+- [TypeScript](https://typescriptlang.org)
+- [Prisma](https://prisma.io)
+- [PWA](https://web.dev/progressive-web-apps/)
+
+More support coming soon!
+
 ## Requirements
 
 - Node.js 18+ and npm
 
 ## Getting started
+To create a project using [lightning](https://github.com/rikvermeulen/lightning) stack, run any of the following three commands and answer the command prompt questions:
 
+### npm
+
+```bash
+npm create lightning-app@latest
+```
+
+### yarn
+
+```bash
+yarn create lightning-app@latest
+```
+
+### pnpm
+
+```bash
+pnpm create lightning-app@latest
+```
 ## License
 
 Licensed under the MIT License, Copyright © 2022

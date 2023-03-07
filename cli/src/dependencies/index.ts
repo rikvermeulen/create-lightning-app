@@ -1,8 +1,8 @@
 import { type PackageManager } from '../utils/getUserPackageManager.js';
-import { prismaInstaller, pwaInstaller } from './installers/index.js';
+import { prismaInstaller, pwaInstaller, vitestInstaller } from './installers/index.js';
 
 // This is the type of the available packages
-export const availablePackages = ['prisma', 'pwa'] as const;
+export const availablePackages = ['prisma', 'pwa', 'vitest'] as const;
 
 export type AvailablePackages = (typeof availablePackages)[number];
 
@@ -30,6 +30,10 @@ export const dependencies = (packages: AvailablePackages[]) => ({
   prisma: {
     inUse: packages.includes('prisma'),
     installer: prismaInstaller,
+  },
+  vitest: {
+    inUse: packages.includes('vitest'),
+    installer: vitestInstaller,
   },
   pwa: {
     inUse: packages.includes('pwa'),

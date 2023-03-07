@@ -29,7 +29,7 @@ interface CLIResults {
 // Default options for the CLI
 const defaultOptions: CLIResults = {
   name: glossary.DEFAULT_NAME,
-  packages: ['prisma', 'pwa'],
+  packages: ['prisma', 'pwa', 'vitest'],
   flags: {
     noInstall: false,
     default: false,

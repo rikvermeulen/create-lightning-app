@@ -1,6 +1,6 @@
 {
   "name": "create-lightning-app",
-  "version": "0.2.7",
+  "version": "0.2.9",
   "description": "Create web application with lightning",
   "license": "MIT",
   "engines": {

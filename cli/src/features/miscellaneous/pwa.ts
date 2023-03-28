@@ -13,8 +13,8 @@ export const pwaInstaller: Installer = ({ projectDir }) => {
   });
   const extrasDir = path.join(PKG_ROOT, 'template/miscellaneous/pwa');
 
-  const configSrc = path.join(extrasDir, '/next.config.js');
-  const configDest = path.join(projectDir, '/next.config.js');
+  const configSrc = path.join(extrasDir, '/next.config.mjs');
+  const configDest = path.join(projectDir, '/next.config.mjs');
 
   const packageJsonPath = path.join(projectDir, 'package.json');
   const packageJsonContent = fs.readJSONSync(packageJsonPath) as PackageJson;

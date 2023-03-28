@@ -2,19 +2,19 @@
 
 import { resolve } from 'path';
 import { config as dotenvConfig } from 'dotenv-safe';
-import withPWA from '@ducanh2912/next-pwa';
+import pwa from '@ducanh2912/next-pwa';
 
 const { parsed: localEnv } = dotenvConfig({
   allowEmptyValues: true,
   path: resolve(process.cwd(), `src/config/.env.${process.env.NODE_ENV}`),
 });
 
-const pwaOptions = {
+const withPWA = pwa({
   dest: 'public',
   register: true,
   skipWaiting: true,
   disable: process.env.NODE_ENV === 'development',
-};
+});
 
 const nextConfig = {
   env: localEnv,
@@ -23,4 +23,4 @@ const nextConfig = {
   },
 };
 
-export default withPWA(nextConfig, pwaOptions);
+export default withPWA(nextConfig);

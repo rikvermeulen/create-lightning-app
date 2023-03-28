@@ -2,7 +2,7 @@
 
 import { logger } from './utils/logger.js';
 import { run } from './cli/index.js';
-import { dependencies } from './dependencies/index.js';
+import { dependencies } from './features/index.js';
 import path from 'path';
 import fs from 'fs-extra';
 import { createProject } from './helpers/createProject.js';
@@ -14,14 +14,17 @@ const main = async () => {
   const {
     name,
     packages,
+    miscellaneous,
     flags: { noInstall, importAlias },
   } = await run();
 
   //Validates the name of the project
   const [projectName, projectDir] = parseNameAndPath(name);
 
+  const items = [...packages, ...miscellaneous];
+
   //Gets the packages that are used
-  const usedPackages = dependencies(packages);
+  const usedPackages = dependencies(items);
 
   //Creates the project
   const project = await createProject({
@@ -39,7 +42,7 @@ const main = async () => {
   });
 
   //Provides next steps logs for the user
-  nextSteps({ projectName: name, packages: usedPackages, noInstall });
+  nextSteps({ projectName: name, items: usedPackages, noInstall });
 
   process.exit(0);
 };

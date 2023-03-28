@@ -2,8 +2,8 @@ import { Command } from 'commander';
 import inquirer from 'inquirer';
 import { validateName } from '../utils/validate.js';
 import glossary from '~/utils/glossary.js';
-import { type AvailablePackages } from '~/dependencies/index.js';
-import { availablePackages } from '../dependencies/index.js';
+import { type AvailableItems } from '~/features/index.js';
+import { logger } from '~/utils/logger.js';
 
 interface CliFlags {
   noInstall: boolean;
@@ -22,14 +22,16 @@ interface CliFlags {
 
 interface CLIResults {
   name: string;
-  packages: AvailablePackages[];
+  packages: AvailableItems[];
+  miscellaneous: AvailableItems[];
   flags: CliFlags;
 }
 
 // Default options for the CLI
 const defaultOptions: CLIResults = {
   name: glossary.DEFAULT_NAME,
-  packages: ['prisma', 'pwa', 'vitest'],
+  packages: ['prisma', 'vitest'],
+  miscellaneous: ['pwa', 'sitemap'],
   flags: {
     noInstall: false,
     default: false,
@@ -72,6 +74,9 @@ export const run = async () => {
     results.name = CLIProvidedName;
   }
 
+  logger.status(glossary.intro);
+  logger.status(glossary.intro_lighting);
+
   // Set the flags
   results.flags = program.opts();
 
@@ -80,6 +85,9 @@ export const run = async () => {
 
   // Prompt the user for which packages they want to use
   results.packages = await promptPackages();
+
+  // Prompt the user for which miscellaneous features they want to use
+  results.miscellaneous = await promptMiscellaneous();
 
   return results;
 };
@@ -101,16 +109,31 @@ const promptName = async (): Promise<string> => {
 };
 
 // Prompt the user for which packages they want to use
-const promptPackages = async (): Promise<AvailablePackages[]> => {
+const promptPackages = async (): Promise<AvailableItems[]> => {
   const { packages } = await inquirer.prompt<Pick<CLIResults, 'packages'>>({
     name: 'packages',
     type: 'checkbox',
     message: 'Which packages would you like to enable?',
-    choices: availablePackages.map((packageName) => ({
+    choices: defaultOptions.packages.map((packageName) => ({
       name: packageName,
       checked: false,
     })),
   });
 
   return packages;
+};
+
+// Prompt the user for which miscellaneous they want to use
+const promptMiscellaneous = async (): Promise<AvailableItems[]> => {
+  const { miscellaneous } = await inquirer.prompt<Pick<CLIResults, 'miscellaneous'>>({
+    name: 'miscellaneous',
+    type: 'checkbox',
+    message: 'Which other features would you like to enable?',
+    choices: defaultOptions.miscellaneous.map((miscellaneousName) => ({
+      name: miscellaneousName,
+      checked: false,
+    })),
+  });
+
+  return miscellaneous;
 };

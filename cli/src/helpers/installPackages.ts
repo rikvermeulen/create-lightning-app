@@ -1,9 +1,9 @@
-import { type InstallerOptions, type installedPackages } from '../dependencies/index.js';
+import { type InstallerOptions, type InstalledItems } from '../features/index.js';
 import { logger } from '~/utils/logger.js';
 import chalk from 'chalk';
 
 type InstallPackagesOptions = {
-  packages: installedPackages;
+  packages: InstalledItems;
 } & InstallerOptions;
 
 export const installPackages = (options: InstallPackagesOptions) => {

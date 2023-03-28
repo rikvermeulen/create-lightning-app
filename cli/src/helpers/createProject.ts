@@ -1,4 +1,4 @@
-import { type installedPackages } from '../dependencies/index.js';
+import { type InstalledItems } from '../features/index.js';
 import { getUserPackageManager } from '../utils/getUserPackageManager.js';
 import path from 'path';
 import { installPackages } from './installPackages.js';
@@ -6,7 +6,7 @@ import { unpackProject } from './unpackProject.js';
 
 interface CreateProjectOptions {
   projectName: string;
-  packages: installedPackages;
+  packages: InstalledItems;
   noInstall: boolean;
   importAlias: string;
 }

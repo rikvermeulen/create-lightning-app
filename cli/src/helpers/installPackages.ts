@@ -1,5 +1,5 @@
-import { type InstallerOptions, type InstalledItems } from '../features/index.js';
-import { logger } from '~/utils/logger.js';
+import { type InstallerOptions, type InstalledItems } from '@/features/index';
+import { logger } from '@/utils/logger';
 import chalk from 'chalk';
 
 type InstallPackagesOptions = {

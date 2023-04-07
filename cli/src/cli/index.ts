@@ -1,9 +1,9 @@
 import { Command } from 'commander';
 import inquirer from 'inquirer';
-import { validateName } from '../utils/validate.js';
-import glossary from '~/utils/glossary.js';
-import { type AvailableItems } from '~/features/index.js';
-import { logger } from '~/utils/logger.js';
+import { validateName } from '@/utils/validate';
+import glossary from '@/utils/glossary';
+import { type AvailableItems } from '@/features/index';
+import { logger } from '@/utils/logger';
 
 interface CliFlags {
   noInstall: boolean;

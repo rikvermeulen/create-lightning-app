@@ -1,7 +1,7 @@
-import { type InstallerOptions } from '../features/index.js';
-import { getUserPackageManager } from '~/utils/getUserPackageManager.js';
-import { logger } from '~/utils/logger.js';
-import glossary from '~/utils/glossary.js';
+import { type InstallerOptions } from '@/features/index';
+import { getUserPackageManager } from '@/utils/getUserPackageManager';
+import { logger } from '@/utils/logger';
+import glossary from '@/utils/glossary';
 
 // This logs the next steps that the user should take in order to advance the project
 export const nextSteps = ({

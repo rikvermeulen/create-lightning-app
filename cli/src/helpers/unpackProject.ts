@@ -1,17 +1,22 @@
-import path from 'path';
+import { type InstallerOptions } from '@/features/index';
+import { PKG_ROOT } from '@/utils/getCurrentDir';
+import chalk from 'chalk';
 import fs from 'fs-extra';
 import inquirer from 'inquirer';
-import { type InstallerOptions } from '../features/index.js';
-import { logger } from '~/utils/logger.js';
-import { PKG_ROOT } from '../utils/getCurrentDir.js';
-import chalk from 'chalk';
+import { logger } from '@/utils/logger';
+import path from 'path';
 
 interface ActionChoices {
   action: 'abort' | 'clear' | 'overwrite';
   confirmAction: boolean;
 }
 
-export const unpackProject = async (options: InstallerOptions): Promise<void> => {
+/**
+ * Unpacks the project.
+ *
+ * @param {InstallerOptions} options - Installer options.
+ */
+export async function unpackProject(options: InstallerOptions): Promise<void> {
   const { projectName, projectDir } = options;
   const templateDir = path.join(PKG_ROOT, 'template/base');
 
@@ -19,11 +24,11 @@ export const unpackProject = async (options: InstallerOptions): Promise<void> =>
 
   logger.info(`\nInstalling project in: \n${chalk.underline.white(projectDir)}\n`);
 
-  await fs.copySync(templateDir, projectDir, { filter: filterOnRemoveTemplateFiles });
+  await fs.copy(templateDir, projectDir, { filter: filterOnRemoveTemplateFiles });
 
   const scaffoldedName = projectName === '.' ? 'App' : projectName;
   console.log(`Installation for ${chalk.cyan(scaffoldedName)} completed!\n`);
-};
+}
 
 async function checkAndHandleExistingDir(
   dir: string,

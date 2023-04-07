@@ -1,4 +1,4 @@
-import { type PackageManager } from '../utils/getUserPackageManager.js';
+import { type PackageManager } from '@/utils/getUserPackageManager.js';
 import { prismaInstaller, vitestInstaller } from './dependencies/index.js';
 import { pwaInstaller } from './miscellaneous/index.js';
 

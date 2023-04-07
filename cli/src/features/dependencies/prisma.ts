@@ -1,9 +1,9 @@
 import { type PackageJson } from 'type-fest';
-import { type Installer } from '../index.js';
+import { type Installer } from '@/features/index';
 import path from 'path';
 import fs from 'fs-extra';
-import { PKG_ROOT } from '../../utils/getCurrentDir.js';
-import { addPackageDependency } from '../../utils/addDependency.js';
+import { PKG_ROOT } from '@/utils/getCurrentDir';
+import { addPackageDependency } from '@/utils/addDependency';
 
 export const prismaInstaller: Installer = ({ projectDir }) => {
   addPackageDependency({

@@ -1,8 +1,8 @@
-import { type InstalledItems } from '../features/index.js';
-import { getUserPackageManager } from '../utils/getUserPackageManager.js';
+import { type InstalledItems } from '@/features/index';
+import { getUserPackageManager } from '@/utils/getUserPackageManager';
 import path from 'path';
-import { installPackages } from './installPackages.js';
-import { unpackProject } from './unpackProject.js';
+import { installPackages } from './installPackages';
+import { unpackProject } from './unpackProject';
 
 interface CreateProjectOptions {
   projectName: string;

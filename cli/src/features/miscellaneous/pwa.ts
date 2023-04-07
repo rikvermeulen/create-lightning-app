@@ -1,16 +1,21 @@
 import { type PackageJson } from 'type-fest';
-import { type Installer } from '../index.js';
+import { type Installer } from '@/features/index';
 import path from 'path';
 import fs from 'fs-extra';
-import { PKG_ROOT } from '../../utils/getCurrentDir.js';
-import { addPackageDependency } from '../../utils/addDependency.js';
+import { PKG_ROOT } from '@/utils/getCurrentDir';
+import { addPackageDependency } from '@/utils/addDependency';
 
-export const pwaInstaller: Installer = ({ projectDir }) => {
+interface InstallerOptions {
+  projectDir: string;
+}
+
+export const pwaInstaller: Installer = ({ projectDir }: InstallerOptions) => {
   addPackageDependency({
     projectDir,
     dependencies: ['@ducanh2912/next-pwa'],
     devMode: true,
   });
+
   const extrasDir = path.join(PKG_ROOT, 'template/miscellaneous/pwa');
 
   const configSrc = path.join(extrasDir, '/next.config.mjs');
@@ -18,6 +23,7 @@ export const pwaInstaller: Installer = ({ projectDir }) => {
 
   const packageJsonPath = path.join(projectDir, 'package.json');
   const packageJsonContent = fs.readJSONSync(packageJsonPath) as PackageJson;
+
   packageJsonContent.scripts = {
     ...packageJsonContent.scripts,
   };

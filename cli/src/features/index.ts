@@ -1,8 +1,8 @@
 import { type PackageManager } from '@/utils/getUserPackageManager.js';
-import { prismaInstaller, vitestInstaller } from './dependencies/index.js';
+import { prismaInstaller, vitestInstaller, nextAuthInstaller } from './dependencies/index.js';
 import { pwaInstaller } from './miscellaneous/index.js';
 
-export const availableItems = ['prisma', 'vitest', 'pwa', 'sitemap'] as const;
+export const availableItems = ['prisma', 'vitest', 'nextAuth', 'pwa'] as const;
 export type AvailableItems = (typeof availableItems)[number];
 
 export type Installer = (opts: InstallerOptions) => void;
@@ -23,7 +23,6 @@ export interface InstallerOptions {
 }
 
 export const dependencies = (items: AvailableItems[]) => {
-  console.log(items);
   const isInUse = (item: string, list: AvailableItems[]) => list.includes(item as AvailableItems);
 
   return {
@@ -35,12 +34,12 @@ export const dependencies = (items: AvailableItems[]) => {
       inUse: isInUse('vitest', items),
       installer: vitestInstaller,
     },
+    nextAuth: {
+      inUse: isInUse('nextAuth', items),
+      installer: nextAuthInstaller,
+    },
     pwa: {
       inUse: isInUse('pwa', items),
-      installer: pwaInstaller,
-    },
-    sitemap: {
-      inUse: isInUse('sitemap', items),
       installer: pwaInstaller,
     },
   };

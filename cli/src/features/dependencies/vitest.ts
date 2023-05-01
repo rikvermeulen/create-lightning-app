@@ -8,7 +8,7 @@ import { addPackageDependency } from '@/utils/addDependency';
 export const vitestInstaller: Installer = ({ projectDir }) => {
   addPackageDependency({
     projectDir,
-    dependencies: ['vitest', '@vitejs/plugin-react'],
+    dependencies: ['vitest', '@vitejs/plugin-react', '@testing-library/react'],
     devMode: true,
   });
 

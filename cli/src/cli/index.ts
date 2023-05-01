@@ -13,8 +13,6 @@ interface CliFlags {
   /** @internal Used in CI. */
   CI: boolean;
   /** @internal Used in CI. */
-  tailwind: boolean;
-  /** @internal Used in CI. */
   prisma: boolean;
   /** @internal Used in CI. */
   nextAuth: boolean;
@@ -30,13 +28,12 @@ interface CLIResults {
 // Default options for the CLI
 const defaultOptions: CLIResults = {
   name: glossary.DEFAULT_NAME,
-  packages: ['prisma', 'vitest'],
-  miscellaneous: ['pwa', 'sitemap'],
+  packages: ['prisma', 'vitest', 'nextAuth'],
+  miscellaneous: ['pwa'],
   flags: {
     noInstall: false,
     default: false,
     CI: false,
-    tailwind: false,
     prisma: false,
     nextAuth: false,
     importAlias: '~/',
